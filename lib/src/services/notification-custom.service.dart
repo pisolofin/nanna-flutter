@@ -36,16 +36,16 @@ ToastificationItem naShowNotificationCustom({
     closeButton      : ToastCloseButton(
       showType: CloseButtonShowType.onHover
     ),
-    closeOnClick     : closable,
-    pauseOnHover     : true,
-    dragToClose      : closable,
-    applyBlurEffect  : true,
+    closeOnClick   : closable,
+    pauseOnHover   : true,
+    dragToClose    : closable,
+    applyBlurEffect: true,
 //    foregroundColor    : platformTextColor(context),
 //    backgroundColor    : lightDartTheme(
 //      context,
 //      ifLight: null,
 //      ifDark : QColorsDark.notificationBackground
 //    ),
-    callbacks        : callbacks ?? const ToastificationCallbacks()
+    callbacks: callbacks ?? const ToastificationCallbacks()
   );
 }

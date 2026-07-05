@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class NaLoadingIndicator extends StatelessWidget {
-  const NaLoadingIndicator({super.key});
+  const NaLoadingIndicator({ super.key });
 
   @override
   Widget build(BuildContext context) {

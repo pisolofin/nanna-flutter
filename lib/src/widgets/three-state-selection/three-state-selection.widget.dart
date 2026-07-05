@@ -43,9 +43,9 @@ class _NaThreeStateSelectionState extends State<NaThreeStateSelection> {
               });
             },
             borderRadius: BorderRadius.circular(8.0),
-            constraints: BoxConstraints(
+            constraints : BoxConstraints(
               minHeight: 40.0,
-              minWidth: (MediaQuery.of(context).size.width - 64) / 3,
+              minWidth : (MediaQuery.of(context).size.width - 64) / 3,
             ),
             children: [
               Text(widget.modeALabel),

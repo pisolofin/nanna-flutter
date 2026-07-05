@@ -37,3 +37,31 @@ const like = 'sample';
 TODO: Tell users more about the package: where to find more information, how to 
 contribute to the package, how to file issues, what response they can expect 
 from the package authors, and more.
+
+## Custom Formatting Scripts
+
+This repository contains custom Dart scripts to enforce a specific code style that the official `dart format` does not support. These scripts are located in the `scripts/` directory.
+
+> **⚠️ IMPORTANT**: To prevent your editor from destroying the custom formatting on save, ensure that `"editor.formatOnSave": false` is set for `[dart]` in your `.vscode/settings.json`.
+
+### 1. Vertical Alignment
+To vertically align named parameters (colons) and ternary operators in your widgets, use `format_alignment.dart`:
+
+```bash
+# Run on the default 'lib' folder
+dart scripts/format_alignment.dart
+
+# Run on a specific folder
+dart scripts/format_alignment.dart lib/src/widgets
+```
+
+### 2. Import Sorting by Length
+To sort your Dart imports by string length (shortest to longest) grouped by `dart:`, `package:`, and local imports, use `format_imports.dart`:
+
+```bash
+# Run on the default 'lib' folder
+dart scripts/format_imports.dart
+
+# Run on a specific folder
+dart scripts/format_imports.dart lib/src/models
+```

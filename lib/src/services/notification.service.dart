@@ -16,17 +16,17 @@ ToastificationItem naShowNotification({
   DismissDirection? dismissDirection
 }) {
   return naShowNotificationCustom(
-    context          : context,
-    type             : type,
-    title            : Text(
+    context: context,
+    type   : type,
+    title  : Text(
       title,
       overflow: TextOverflow.visible,
     ),
-    description      : (subtitle?.isEmpty ?? true)
+    description: (subtitle?.isEmpty ?? true)
       ? null
       : RichText(
           text: TextSpan(
-            text: subtitle!,
+            text : subtitle!,
             style: TextStyle(
               color    : Color(0xff000000),//platformTextColor(context),
               fontStyle: FontStyle.italic

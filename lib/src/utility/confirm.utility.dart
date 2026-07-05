@@ -14,11 +14,11 @@ Future<bool> naConfirmModalAsync(BuildContext context, {
   // For now, we only have Material design implemented.
   return _naConfirmModal_material_Async(
     context,
-    title: title,
-    content: content,
-    actionNoText: actionNoText,
-    actionNoColor: actionNoColor,
-    actionYesText: actionYesText,
+    title         : title,
+    content       : content,
+    actionNoText  : actionNoText,
+    actionNoColor : actionNoColor,
+    actionYesText : actionYesText,
     actionYesColor: actionYesColor
   );
 }

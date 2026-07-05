@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 /// Shows full screen overlay of waiting
 OverlayEntry naOverlayShowFullScreen({ required BuildContext context, required Widget child, Color? color }) {
@@ -28,7 +28,7 @@ OverlayEntry naOverlayShowFullScreenWaiting({ required BuildContext context, req
     color  : color ?? Color(0x80ffffff),
     child  : Column(
       mainAxisSize: MainAxisSize.min,
-      children: [
+      children    : [
         CircularProgressIndicator(),
         SizedBox(height: 16),
         Text(text, style: TextStyle(color: Colors.white)),

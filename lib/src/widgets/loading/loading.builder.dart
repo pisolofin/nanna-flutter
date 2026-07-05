@@ -1,9 +1,7 @@
-
 import 'package:flutter/widgets.dart';
 
-import '../view/error-view.widget.dart';
-
 import 'loading-indicator.widget.dart';
+import '../view/error-view.widget.dart';
 
 typedef NaLoadingBuilderEmptyCheck<T> = bool Function(T? value);
 
