@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".logo/nanna-logo-moon-star.png" alt="Nanna Logo" width="200"/>
+  <img src=".logo/nanna-logo-moon-star-transparent.png" alt="Nanna Logo" width="200"/>
 </p>
 
 # Nanna
