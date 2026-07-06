@@ -1,8 +1,8 @@
 <p align="center">
-  <img src=".logo/nanna-logo-moon-star-transparent.png" alt="Nanna Logo" width="200"/>
+  <img src=".logo/nanna-logo-transparent.png" alt="Nanna Logo" width="200"/>
 </p>
 
-# Nanna
+# nanna
 
 A comprehensive set of utilities, extensions, widgets, and services designed to accelerate Flutter app development. 
 This package provides robust solutions for secure storage, notification management, routing wrappers, and common UI patterns.
@@ -37,16 +37,16 @@ import 'package:nanna/nanna.dart';
 Easily show success, error, or custom notifications:
 ```dart
 naShowNotification(
-  context: context,
-  type: ToastificationType.success,
-  title: 'Success!',
+  context : context,
+  type    : ToastificationType.success,
+  title   : 'Success!',
   subtitle: 'Operation completed successfully.',
 );
 
 naShowNotificationException(
   context: context,
-  title: 'Error Occurred',
-  error: e,
+  title  : 'Error Occurred',
+  error  : exception,
 );
 ```
 
