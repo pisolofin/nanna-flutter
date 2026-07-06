@@ -59,30 +59,31 @@ bool isFirstLaunch = await naSecureStorageReadBoolAsync('isFirstLaunch') ?? true
 
 ## Custom Formatting Scripts
 
-This repository contains custom Dart scripts to enforce a specific code style that the official `dart format` does not support. These scripts are located in the `scripts/` directory.
+This repository contains custom Dart scripts to enforce a specific code style that the official `dart format` does not support. 
+By importing `nanna` in your project, you can run these formatting scripts directly via `dart run`.
 
 > **⚠️ IMPORTANT**: To prevent your editor from destroying the custom formatting on save, ensure that `"editor.formatOnSave": false` is set for `[dart]` in your `.vscode/settings.json`.
 
 ### 1. Vertical Alignment
-To vertically align named parameters (colons) and ternary operators in your widgets, use `format-alignment.dart`:
+To vertically align named parameters (colons) and ternary operators in your widgets, use `format_alignment`:
 
 ```bash
 # Run on the default 'lib' folder
-dart scripts/format-alignment.dart
+dart run nanna:format-alignment
 
 # Run on a specific folder
-dart scripts/format-alignment.dart lib/src/widgets
+dart run nanna:format-alignment lib/src/widgets
 ```
 
 ### 2. Import Sorting by Length
-To sort your Dart imports by string length (shortest to longest) grouped by `dart:`, `package:`, and local imports, use `format-imports.dart`:
+To sort your Dart imports by string length (shortest to longest) grouped by `dart:`, `package:`, and local imports, use `format_imports`:
 
 ```bash
 # Run on the default 'lib' folder
-dart scripts/format-imports.dart
+dart run nanna:format-imports
 
 # Run on a specific folder
-dart scripts/format-imports.dart lib/src/models
+dart run nanna:format-imports lib/src/models
 ```
 
 ## License
