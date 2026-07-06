@@ -1,42 +1,61 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Nanna Flutter
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A comprehensive set of utilities, extensions, widgets, and services designed to accelerate Flutter app development. 
+This package provides robust solutions for secure storage, notification management, routing wrappers, and common UI patterns.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- **Services**: Simplified `toastification` based notifications and customizable overlays.
+- **Secure Storage**: A streamlined wrapper around `flutter_secure_storage` to handle booleans, dates, and simple strings with ease.
+- **Extensions**: Powerful extensions for `Iterable` and dates, such as easy filtering and transformations.
+- **Utility Functions**: Helpers for HTTP communication, datetime operations, file system access, native feature handling, and confirmation dialogs.
+- **Widgets**: Reusable components like a configurable `LoadingBuilder`, updatable notification widgets, and a three-state selection widget.
+- **Routing**: Useful routing configuration structures and path-joining utilities.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Include `nanna` in your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  nanna: ^1.0.0
+```
+
+And import it in your Dart files:
+
+```dart
+import 'package:nanna/nanna.dart';
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
+### Notifications
+Easily show success, error, or custom notifications:
 ```dart
-const like = 'sample';
+naShowNotification(
+  context: context,
+  type: ToastificationType.success,
+  title: 'Success!',
+  subtitle: 'Operation completed successfully.',
+);
+
+naShowNotificationException(
+  context: context,
+  title: 'Error Occurred',
+  error: e,
+);
 ```
 
-## Additional information
+### Secure Storage
+Initialize and use secure storage effortlessly:
+```dart
+// Initialize at app start
+naSecureStorageInit();
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+// Write and read
+await naSecureStorageWriteBoolAsync('isFirstLaunch', false);
+bool isFirstLaunch = await naSecureStorageReadBoolAsync('isFirstLaunch') ?? true;
+```
 
 ## Custom Formatting Scripts
 
@@ -65,3 +84,7 @@ dart scripts/format_imports.dart
 # Run on a specific folder
 dart scripts/format_imports.dart lib/src/models
 ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
