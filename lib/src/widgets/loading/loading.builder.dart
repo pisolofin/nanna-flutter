@@ -38,7 +38,7 @@ class NaLoadingBuilder<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return FutureBuilder<T>(
       key        : this.key,
       future     : this.future,
       initialData: this.initialData,

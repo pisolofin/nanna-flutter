@@ -1,4 +1,4 @@
-/// Converts a dynamic input to a Map<String, dynamic>.
+/// Converts a dynamic input to a `Map<String, dynamic>`.
 Map<String, dynamic> convertToMap(dynamic input) {
   if (input is Map<String, dynamic>) {
     return input;

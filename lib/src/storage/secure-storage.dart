@@ -6,9 +6,7 @@ late final FlutterSecureStorage _secureStorage;
 
 /// Initialize Secure storage
 void naSecureStorageInit() {
-  AndroidOptions getAndroidOptions() => const AndroidOptions(
-    encryptedSharedPreferences: true,
-  );
+  AndroidOptions getAndroidOptions() => const AndroidOptions();
   _secureStorage = FlutterSecureStorage(
     aOptions: getAndroidOptions()
   );
