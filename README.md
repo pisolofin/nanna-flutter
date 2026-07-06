@@ -1,4 +1,8 @@
-# Nanna Flutter
+<p align="center">
+  <img src=".logo/nanna-logo-moon-star.png" alt="Nanna Logo" width="200"/>
+</p>
+
+# Nanna
 
 A comprehensive set of utilities, extensions, widgets, and services designed to accelerate Flutter app development. 
 This package provides robust solutions for secure storage, notification management, routing wrappers, and common UI patterns.
