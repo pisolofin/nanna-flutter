@@ -12,7 +12,7 @@ extension NaIterableDateTimeExtensions on Iterable<DateTime> {
     return this.reduce((DateTime currentDate, DateTime nextDate) {
       if (currentDate.isAfter(nextDate)) {
         return currentDate;
-      } else {
+      }else {
         return nextDate;
       }
     });
