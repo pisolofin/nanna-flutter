@@ -1,3 +1,4 @@
+// ignore_for_file: unnecessary_library_name
 /// Nanna
 /// 
 /// A comprehensive set of utilities, extensions, widgets, and services 
