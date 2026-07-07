@@ -1,4 +1,8 @@
-library;
+/// Nanna
+/// 
+/// A comprehensive set of utilities, extensions, widgets, and services 
+/// designed to accelerate Flutter app development.
+library nanna;
 
 export 'src/services/overlay.service.dart';
 export 'src/services/notification.service.dart';
@@ -33,4 +37,4 @@ export 'src/widgets/notification-updatable/notification-updatable.widget.dart';
 export 'src/widgets/three-state-selection/three-state-selection.widget.dart';
 export 'src/widgets/three-state-selection/three-state-selection.controller.dart';
 
-export 'package:toastification/toastification.dart';
+export 'package:toastification/toastification.dart' show ToastificationType;
