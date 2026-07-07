@@ -19,5 +19,5 @@ dev_dependencies:
   lints: ^6.1.0
 
 executables:
-  format-alignment: format-alignment
-  format-imports: format-imports
+  format-alignment: format-alignment.script
+  format-imports: format-imports.script
