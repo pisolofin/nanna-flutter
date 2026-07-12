@@ -50,6 +50,14 @@ naShowNotificationException(
 );
 ```
 
+### Preferences Storage
+Easily store and retrieve preferences synchronously:
+`dart
+await NaPreferences.initAsync();
+await NaPreferences.setString('theme', 'dark');
+final theme = NaPreferences.getString('theme'); // Synchronous read!
+`
+
 ### Secure Storage
 Initialize and use secure storage effortlessly:
 ```dart
