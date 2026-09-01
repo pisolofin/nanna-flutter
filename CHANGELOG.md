@@ -1,3 +1,7 @@
+## 1.1.0
+
+- Added NaPreferencesService for easy wrapper around shared_preferences.
+
 ## 1.0.2
 
 - Fixed pub.dev static analysis score (file names lint).

@@ -20,6 +20,7 @@ export 'src/exceptions/exception.dart';
 export 'src/extensions/iterable.extensions.dart';
 export 'src/extensions/iterable-date-time.extensions.dart';
 
+export 'src/storage/preferences.service.dart';
 export 'src/storage/secure-storage.service.dart';
 
 export 'src/utility/http.utility.dart';
