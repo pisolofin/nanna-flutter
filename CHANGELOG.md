@@ -1,3 +1,6 @@
+## 1.2.0
+- flutter_secure_storage and toastification updated.
+
 ## 1.1.0
 
 - Added NaPreferencesService for easy wrapper around shared_preferences.
