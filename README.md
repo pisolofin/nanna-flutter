@@ -77,7 +77,7 @@ By importing `nanna` in your project, you can run these formatting scripts direc
 > **⚠️ IMPORTANT**: To prevent your editor from destroying the custom formatting on save, ensure that `"editor.formatOnSave": false` is set for `[dart]` in your `.vscode/settings.json`.
 
 ### 1. Vertical Alignment
-To vertically align named parameters (colons) and ternary operators in your widgets, use `format_alignment`:
+To vertically align named parameters (colons), ternary operators, and ensure a single trailing empty line in your widgets, use `format_alignment`:
 
 ```bash
 # Run on the default 'lib' folder
@@ -85,6 +85,9 @@ dart run nanna:format-alignment
 
 # Run on a specific folder
 dart run nanna:format-alignment lib/src/widgets
+
+# Run with verbose logging
+dart run nanna:format-alignment --verbose
 ```
 
 ### 2. Import Sorting by Length
@@ -96,6 +99,9 @@ dart run nanna:format-imports
 
 # Run on a specific folder
 dart run nanna:format-imports lib/src/models
+
+# Run with verbose logging
+dart run nanna:format-imports --verbose
 ```
 
 ## License

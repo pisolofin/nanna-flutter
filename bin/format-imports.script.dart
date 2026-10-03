@@ -1,17 +1,23 @@
 import 'dart:io';
 
 void main(List<String> args) {
-  final targetDir = args.isNotEmpty ? args.first : 'lib';
-  final dir = Directory(targetDir);
+  final bool isVerbose = args.contains('--verbose') || args.contains('-v');
+  final List<String> positionalArgs = args.where((argument) => !argument.startsWith('-')).toList();
+  final String targetDir = positionalArgs.isNotEmpty ? positionalArgs.first : 'lib';
+  final Directory dir = Directory(targetDir);
   
   if (!dir.existsSync()) {
     print('Directory $targetDir does not exist.');
     return;
   }
 
-  final files = dir.listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.dart'));
+  final files = dir.listSync(recursive: true).whereType<File>().where((fileEntity) => fileEntity.path.endsWith('.dart'));
 
   for (final file in files) {
+    if (isVerbose) {
+      print('Analyzing: ${file.path}');
+    }
+
     final lines = file.readAsLinesSync();
     final newLines = <String>[];
     

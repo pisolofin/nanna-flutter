@@ -1,8 +1,10 @@
 import 'dart:io';
 
 void main(List<String> args) {
-  final targetDir = args.isNotEmpty ? args.first : 'lib';
-  final dir = Directory(targetDir);
+  final bool isVerbose = args.contains('--verbose') || args.contains('-v');
+  final List<String> positionalArgs = args.where((argument) => !argument.startsWith('-')).toList();
+  final String targetDir = positionalArgs.isNotEmpty ? positionalArgs.first : 'lib';
+  final Directory dir = Directory(targetDir);
   
   if (!dir.existsSync()) {
     print('Directory $targetDir does not exist.');
@@ -16,14 +18,15 @@ void main(List<String> args) {
   final bracesRegex = RegExp(r'(?<!\$)\{[ \t]*([^\n{}]+?)[ \t]*\}');
 
   for (final file in files) {
-    String content = file.readAsStringSync().replaceAll('\r\n', '\n');
+    if (isVerbose) {
+      print('Analyzing: ${file.path}');
+    }
 
-    bool changed = false;
+    String content = file.readAsStringSync().replaceAll('\r\n', '\n');
 
     // Convert tabs to two spaces
     if (content.contains('\t')) {
       content = content.replaceAll('\t', '  ');
-      changed = true;
     }
 
     final newContent1 = content.replaceAllMapped(ternaryRegex, (match) {
@@ -35,7 +38,6 @@ void main(List<String> args) {
     
     if (newContent1 != content) {
       content = newContent1;
-      changed = true;
     }
 
     final newContent2 = content.replaceAllMapped(bracesRegex, (match) {
@@ -49,7 +51,6 @@ void main(List<String> args) {
     
     if (newContent2 != content) {
       content = newContent2;
-      changed = true;
     }
 
     final lines = content.split('\n');
@@ -84,9 +85,6 @@ void main(List<String> args) {
           final padding = ' ' * (maxColonIndex - (indent.length + paramName.length));
           final newLine = '$indent$paramName$padding:$rest';
           newLines.add(newLine);
-          if (newLine != lines[applyIndex]) {
-            changed = true;
-          }
         }
         lineIndex = scanIndex;
       }else {
@@ -95,8 +93,17 @@ void main(List<String> args) {
       }
     }
     
-    if (changed) {
-      file.writeAsStringSync(newLines.join('\r\n'));
+    // Ensure the file ends with one and only one empty line
+    while (newLines.isNotEmpty && newLines.last.trim().isEmpty) {
+      newLines.removeLast();
+    }
+    if (newLines.isNotEmpty) {
+      newLines.add('');
+    }
+
+    final formattedContent = newLines.join('\r\n');
+    if (formattedContent != file.readAsStringSync()) {
+      file.writeAsStringSync(formattedContent);
     }
   }
   print('✅ Allineamento verticale e tabulazione completati per la cartella: $targetDir');
