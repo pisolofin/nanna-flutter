@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 typedef NaTCallback<T, R> = R Function(T value);
 typedef NaAsyncTCallback<T, F> = Future<F> Function(T value);
 
