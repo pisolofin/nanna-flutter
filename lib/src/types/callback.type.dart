@@ -3,3 +3,5 @@ typedef NaAsyncTCallback<T, F> = Future<F> Function(T value);
 
 typedef NaIntCallback<R> = NaTCallback<int, R>;
 typedef NaAsyncIntCallback<F> = NaAsyncTCallback<int, F>;
+
+typedef NaContextCallback = void Function(BuildContext context);
