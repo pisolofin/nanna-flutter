@@ -1,24 +1,33 @@
 import 'dart:io';
 
 void main(List<String> args) {
-  final targetDir = args.isNotEmpty ? args.first : 'lib';
-  final dir = Directory(targetDir);
+  final bool isVerbose = args.contains('--verbose') || args.contains('-v');
+  final List<String> positionalArgs = args.where((argument) => !argument.startsWith('-')).toList();
+  final String targetDir = positionalArgs.isNotEmpty ? positionalArgs.first : 'lib';
+  final Directory dir = Directory(targetDir);
   
   if (!dir.existsSync()) {
     print('Directory $targetDir does not exist.');
     return;
   }
 
-  final files = dir.listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.dart'));
+  final files = dir.listSync(recursive: true).whereType<File>().where((fileEntity) => fileEntity.path.endsWith('.dart'));
 
   final alignRegex = RegExp(r'^(\s+)([a-zA-Z0-9_]+)\s*:(.*)$');
   final ternaryRegex = RegExp(r'^([ \t]*)final\s+([A-Za-z0-9_]+)\?\s+([A-Za-z0-9_]+)\s*=\s*\n?\s*options\s+is\s+\2\s*\?\s*options\s*:\s*null\s*;', multiLine: true);
   final bracesRegex = RegExp(r'(?<!\$)\{[ \t]*([^\n{}]+?)[ \t]*\}');
 
   for (final file in files) {
+    if (isVerbose) {
+      print('Analyzing: ${file.path}');
+    }
+
     String content = file.readAsStringSync().replaceAll('\r\n', '\n');
 
-    bool changed = false;
+    // Convert tabs to two spaces
+    if (content.contains('\t')) {
+      content = content.replaceAll('\t', '  ');
+    }
 
     final newContent1 = content.replaceAllMapped(ternaryRegex, (match) {
       final indent = match.group(1)!;
@@ -29,7 +38,6 @@ void main(List<String> args) {
     
     if (newContent1 != content) {
       content = newContent1;
-      changed = true;
     }
 
     final newContent2 = content.replaceAllMapped(bracesRegex, (match) {
@@ -43,55 +51,60 @@ void main(List<String> args) {
     
     if (newContent2 != content) {
       content = newContent2;
-      changed = true;
     }
 
     final lines = content.split('\n');
     final newLines = <String>[];
     
-    int i = 0;
-    while (i < lines.length) {
-      final match = alignRegex.firstMatch(lines[i]);
+    int lineIndex = 0;
+    while (lineIndex < lines.length) {
+      final match = alignRegex.firstMatch(lines[lineIndex]);
       if (match != null) {
         final indent = match.group(1)!;
-        int j = i;
+        int scanIndex = lineIndex;
         int maxColonIndex = 0;
         
-        while (j < lines.length) {
-          final m = alignRegex.firstMatch(lines[j]);
-          if (m != null && m.group(1) == indent) {
-            final paramName = m.group(2)!;
+        while (scanIndex < lines.length) {
+          final currentMatch = alignRegex.firstMatch(lines[scanIndex]);
+          if (currentMatch != null && currentMatch.group(1) == indent) {
+            final paramName = currentMatch.group(2)!;
             final colonIndex = indent.length + paramName.length;
             if (colonIndex > maxColonIndex) {
               maxColonIndex = colonIndex;
             }
-            j++;
-          } else {
+            scanIndex++;
+          }else {
             break;
           }
         }
         
-        for (int k = i; k < j; k++) {
-          final m = alignRegex.firstMatch(lines[k])!;
-          final paramName = m.group(2)!;
-          final rest = m.group(3)!;
+        for (int applyIndex = lineIndex; applyIndex < scanIndex; applyIndex++) {
+          final currentMatch = alignRegex.firstMatch(lines[applyIndex])!;
+          final paramName = currentMatch.group(2)!;
+          final rest = currentMatch.group(3)!;
           final padding = ' ' * (maxColonIndex - (indent.length + paramName.length));
           final newLine = '$indent$paramName$padding:$rest';
           newLines.add(newLine);
-          if (newLine != lines[k]) {
-            changed = true;
-          }
         }
-        i = j;
-      } else {
-        newLines.add(lines[i]);
-        i++;
+        lineIndex = scanIndex;
+      }else {
+        newLines.add(lines[lineIndex]);
+        lineIndex++;
       }
     }
     
-    if (changed) {
-      file.writeAsStringSync(newLines.join('\r\n'));
+    // Ensure the file ends with one and only one empty line
+    while (newLines.isNotEmpty && newLines.last.trim().isEmpty) {
+      newLines.removeLast();
+    }
+    if (newLines.isNotEmpty) {
+      newLines.add('');
+    }
+
+    final formattedContent = newLines.join('\r\n');
+    if (formattedContent != file.readAsStringSync()) {
+      file.writeAsStringSync(formattedContent);
     }
   }
-  print('✅ Allineamento verticale completato per la cartella: $targetDir');
+  print('✅ Allineamento verticale e tabulazione completati per la cartella: $targetDir');
 }

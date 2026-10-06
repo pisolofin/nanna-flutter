@@ -1,3 +1,14 @@
+## 1.3.0
+
+- Added `naCastIf` utility for safe dynamic type casting with optional fallback.
+- Added `NaContextCallback` typedef.
+- Added CLI executable entrypoints for `format-alignment` and `format-imports` (`dart run nanna:format-...`).
+- Enhanced `format-alignment` script with tab replacement, `--verbose` logging, and single trailing newline enforcement.
+- Enhanced `format-imports` script with `--verbose` logging support.
+
+## 1.2.0
+- flutter_secure_storage and toastification updated.
+
 ## 1.1.0
 
 - Added NaPreferencesService for easy wrapper around shared_preferences.

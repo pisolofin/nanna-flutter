@@ -12,9 +12,10 @@ This package provides robust solutions for secure storage, notification manageme
 - **Services**: Simplified `toastification` based notifications and customizable overlays.
 - **Secure Storage**: A streamlined wrapper around `flutter_secure_storage` to handle booleans, dates, and simple strings with ease.
 - **Extensions**: Powerful extensions for `Iterable` and dates, such as easy filtering and transformations.
-- **Utility Functions**: Helpers for HTTP communication, datetime operations, file system access, native feature handling, and confirmation dialogs.
+- **Utility Functions**: Helpers for HTTP communication, safe casting (`naCastIf`), datetime operations, file system access, native feature handling, and confirmation dialogs.
 - **Widgets**: Reusable components like a configurable `LoadingBuilder`, updatable notification widgets, and a three-state selection widget.
 - **Routing**: Useful routing configuration structures and path-joining utilities.
+- **Types & Callbacks**: Convenient callback signatures (`NaContextCallback`, `NaTCallback`, `NaAsyncTCallback`, etc.) and `DateOnly`.
 
 ## Getting started
 
@@ -22,7 +23,7 @@ Include `nanna` in your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  nanna: ^1.0.0
+  nanna: ^1.3.0
 ```
 
 And import it in your Dart files:
@@ -52,11 +53,11 @@ naShowNotificationException(
 
 ### Preferences Storage
 Easily store and retrieve preferences synchronously:
-`dart
+```dart
 await NaPreferences.initAsync();
 await NaPreferences.setString('theme', 'dark');
 final theme = NaPreferences.getString('theme'); // Synchronous read!
-`
+```
 
 ### Secure Storage
 Initialize and use secure storage effortlessly:
@@ -69,6 +70,13 @@ await naSecureStorageWriteBoolAsync('isFirstLaunch', false);
 bool isFirstLaunch = await naSecureStorageReadBoolAsync('isFirstLaunch') ?? true;
 ```
 
+### Safe Casting
+Safely cast dynamic values with fallback support:
+```dart
+final int count = naCastIf<int>(rawValue, defaultValue: () => 0);
+final String? name = naCastIf<String?>(rawValue);
+```
+
 ## Custom Formatting Scripts
 
 This repository contains custom Dart scripts to enforce a specific code style that the official `dart format` does not support. 
@@ -77,7 +85,7 @@ By importing `nanna` in your project, you can run these formatting scripts direc
 > **⚠️ IMPORTANT**: To prevent your editor from destroying the custom formatting on save, ensure that `"editor.formatOnSave": false` is set for `[dart]` in your `.vscode/settings.json`.
 
 ### 1. Vertical Alignment
-To vertically align named parameters (colons) and ternary operators in your widgets, use `format_alignment`:
+To vertically align named parameters (colons), ternary operators, and ensure a single trailing empty line in your widgets, use `format_alignment`:
 
 ```bash
 # Run on the default 'lib' folder
@@ -85,6 +93,9 @@ dart run nanna:format-alignment
 
 # Run on a specific folder
 dart run nanna:format-alignment lib/src/widgets
+
+# Run with verbose logging
+dart run nanna:format-alignment --verbose
 ```
 
 ### 2. Import Sorting by Length
@@ -96,6 +107,9 @@ dart run nanna:format-imports
 
 # Run on a specific folder
 dart run nanna:format-imports lib/src/models
+
+# Run with verbose logging
+dart run nanna:format-imports --verbose
 ```
 
 ## License

@@ -24,6 +24,7 @@ export 'src/storage/preferences.service.dart';
 export 'src/storage/secure-storage.service.dart';
 
 export 'src/utility/http.utility.dart';
+export 'src/utility/cast.utility.dart';
 export 'src/utility/native.utility.dart';
 export 'src/utility/confirm.utility.dart';
 export 'src/utility/datetime.utility.dart';
