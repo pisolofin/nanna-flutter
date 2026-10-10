@@ -33,6 +33,7 @@ export 'src/utility/file-system.utility.dart';
 export 'src/types/callback.type.dart';
 export 'src/types/date-only.type.dart';
 export 'src/types/widget-builder.type.dart';
+export 'src/types/cancel-token.type.dart';
 
 export 'src/widgets/loading/loading.builder.dart';
 export 'src/widgets/notification-updatable/notification-updatable.widget.dart';
