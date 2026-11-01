@@ -19,7 +19,7 @@ void main(List<String> args) {
   final alignRegex = RegExp(r'^(\s+)([a-zA-Z0-9_]+)\s*:(.*)$');
   final ternaryRegex = RegExp(r'^([ \t]*)final\s+([A-Za-z0-9_]+)\?\s+([A-Za-z0-9_]+)\s*=\s*\n?\s*options\s+is\s+\2\s*\?\s*options\s*:\s*null\s*;', multiLine: true);
   final bracesRegex = RegExp(r'(?<!\$)\{[ \t]*([^\n{}]+?)[ \t]*\}');
-  final braceKeywordsRegex = RegExp(r'\}\s+(else|catch|finally)\b');
+  final braceKeywordsRegex = RegExp(r'\}\s+(else|catch|finally|on)\b');
 
   for (final file in files) {
     if (isVerbose) {
