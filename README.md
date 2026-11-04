@@ -99,7 +99,15 @@ dart run nanna:format-alignment --verbose
 ```
 
 ### 2. Import Sorting by Length
-To sort your Dart imports by string length (shortest to longest) grouped by `dart:`, `package:`, and local imports, use `format_imports`:
+To sort and group your Dart imports, use `format_imports`.
+
+Imports are organized into distinct groups separated by an empty line in the following order:
+1. `import 'dart:...'`
+2. `import 'package:...'` (third-party packages)
+3. `import 'package:nanna...'`
+4. Relative imports (`import '...'`): each level of `../` creates a separate group; imports with more `../` appear first, down to local imports in the same directory without `../`.
+
+Within each group, imports are sorted by line length (shortest to longest).
 
 ```bash
 # Run on the default 'lib' folder

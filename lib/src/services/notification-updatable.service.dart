@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:toastification/toastification.dart';
 
-import 'notification-custom.service.dart';
 import '../widgets/notification-updatable/notification-updatable.widget.dart';
+
+import 'notification-custom.service.dart';
 
 class NotificationUpdatable {
   final StreamController<Widget> titleController;
@@ -22,7 +23,7 @@ NotificationUpdatable naShowNotificationUpdatable({
   Widget? subtitle,
   bool showIcon = true,
   ToastificationCallbacks? callbacks,
-  int seconds = 2,
+  int seconds           = 2,
   bool willHaveSubtitle = true
 //  Duration? animationDuration,
 //  DismissDirection? dismissDirection

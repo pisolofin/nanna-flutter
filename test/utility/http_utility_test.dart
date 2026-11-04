@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:nanna/nanna.dart';
 
 void main() {
@@ -9,7 +10,7 @@ void main() {
         'age': '30',
         'city': 'New York'
       };
-      
+
       final encoded = encodeParams(params);
       expect(encoded, 'name=John%20Doe&age=30&city=New%20York');
     });

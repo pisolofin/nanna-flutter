@@ -35,9 +35,10 @@ This document outlines the technical constraints, architectural decisions, and s
     *   Default UI import should be `import 'package:flutter/widgets.dart';` (avoid `material.dart` or `cupertino.dart` unless strictly necessary).
     *   Order of imports (separated by empty lines):
         1. `import 'dart:...'`
-        2. `import 'package:...'`
-        3. Local project imports.
-    *   Within each group, sort imports by line length.
+        2. `import 'package:...'` (external / third-party dependencies)
+        3. `import 'package:nanna...'`
+        4. Relative imports (`import '...'`): grouped by the count of `../` in descending order (imports with more `../` first, down to relative imports without `../` in the same directory), with an empty line separating each relative group.
+    *   Within each group, sort imports by line length (shortest to longest).
 *   **Flutter Specifics:**
     *   Constructors: always use `this.propertyName` in the signature.
     *   State Widgets: inside `State` classes, access the widget properties using `widget` (NOT `this.widget`).
