@@ -10,7 +10,7 @@ void main(List<String> args) {
     files = [File(targetPath)];
   } else if (FileSystemEntity.isDirectorySync(targetPath)) {
     final dir = Directory(targetPath);
-    files = dir.listSync(recursive: true).whereType<File>().where((fileEntity) => fileEntity.path.endsWith('.dart')).toList();
+    files = dir.listSync(recursive: true, followLinks: false).whereType<File>().where((fileEntity) => fileEntity.path.endsWith('.dart')).where((fileEntity) { final norm = fileEntity.path.replaceAll(r'\', '/'); return !norm.contains('.plugin_symlinks') && !norm.contains('.dart_tool') && !norm.contains('/ephemeral/') && !norm.contains('/build/'); }).toList();
   } else {
     print('Path $targetPath does not exist.');
     return;
