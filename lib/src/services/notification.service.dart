@@ -50,7 +50,7 @@ void naShowNotificationException({
   required Object? error,
   String Function()? errorFunction,
   bool showIcon = true,
-  int seconds = 10,
+  int seconds   = 10,
   ToastificationCallbacks? callbacks,
 }) {
   String  errorTitle   = title;

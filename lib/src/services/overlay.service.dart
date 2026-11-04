@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Shows full screen overlay of waiting
 OverlayEntry naOverlayShowFullScreen({ required BuildContext context, required Widget child, Color? color }) {
-  final OverlayState overlay = Overlay.of(context);
+  final OverlayState overlay      = Overlay.of(context);
   final OverlayEntry overlayEntry = OverlayEntry(
     builder: (context) => Positioned.fill(
       child: Material(

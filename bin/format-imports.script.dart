@@ -11,16 +11,16 @@ import 'dart:io';
 /// and alphabetically if lengths are equal.
 String formatImportsContent(String content) {
   final lineEnding = content.contains('\r\n') ? '\r\n' : '\n';
-  final lines = content.split(RegExp(r'\r?\n'));
+  final lines      = content.split(RegExp(r'\r?\n'));
 
-  final dartImports = <String>[];
-  final packageImports = <String>[];
-  final nannaImports = <String>[];
+  final dartImports                                   = <String>[];
+  final packageImports                                = <String>[];
+  final nannaImports                                  = <String>[];
   final Map<int, List<String>> relativeImportsByLevel = {};
 
   int importStartIndex = -1;
-  int importEndIndex = -1;
-  bool hasImports = false;
+  int importEndIndex   = -1;
+  bool hasImports      = false;
 
   for (int i = 0; i < lines.length; i++) {
     final line = lines[i].trim();
@@ -28,23 +28,23 @@ String formatImportsContent(String content) {
       if (importStartIndex == -1) {
         importStartIndex = i;
       }
-      hasImports = true;
+      hasImports     = true;
       importEndIndex = i;
 
       final match = RegExp(r'''import\s+['"]([^'"]+)['"]''').firstMatch(line);
-      final uri = match?.group(1) ?? '';
+      final uri   = match?.group(1) ?? '';
 
       if (uri.startsWith('dart:')) {
         dartImports.add(line);
-      } else if (uri == 'package:nanna' || uri.startsWith('package:nanna/')) {
+      }else if (uri == 'package:nanna' || uri.startsWith('package:nanna/')) {
         nannaImports.add(line);
-      } else if (uri.startsWith('package:')) {
+      }else if (uri.startsWith('package:')) {
         packageImports.add(line);
-      } else {
+      }else {
         final parentCount = RegExp(r'\.\.[/\\]').allMatches(uri).length;
         relativeImportsByLevel.putIfAbsent(parentCount, () => <String>[]).add(line);
       }
-    } else if (line.isNotEmpty &&
+    }else if (line.isNotEmpty &&
         !line.startsWith('//') &&
         !line.startsWith('/*') &&
         !line.startsWith('*') &&
@@ -60,7 +60,9 @@ String formatImportsContent(String content) {
 
   int compareImports(String a, String b) {
     final lengthComparison = a.length.compareTo(b.length);
-    if (lengthComparison != 0) return lengthComparison;
+    if (lengthComparison != 0) {
+      return lengthComparison;
+    }
     return a.compareTo(b);
   }
 
@@ -98,11 +100,11 @@ String formatImportsContent(String content) {
     }
   }
 
-  final newLines = <String>[];
+  final newLines    = <String>[];
   bool addedImports = false;
 
   for (int i = 0; i < lines.length; i++) {
-    final line = lines[i];
+    final line    = lines[i];
     final trimmed = line.trim();
 
     if (i >= importStartIndex && (trimmed.startsWith('import ') || (trimmed.isEmpty && i <= importEndIndex))) {
@@ -111,7 +113,7 @@ String formatImportsContent(String content) {
         newLines.add('');
         addedImports = true;
       }
-    } else {
+    }else {
       newLines.add(line);
     }
   }
@@ -122,7 +124,7 @@ String formatImportsContent(String content) {
       if (cleanedLines.isEmpty || cleanedLines.last.trim().isNotEmpty) {
         cleanedLines.add('');
       }
-    } else {
+    }else {
       cleanedLines.add(newLines[i]);
     }
   }
@@ -131,16 +133,16 @@ String formatImportsContent(String content) {
 }
 
 void main(List<String> args) {
-  final bool isVerbose = args.contains('--verbose') || args.contains('-v');
+  final bool isVerbose              = args.contains('--verbose') || args.contains('-v');
   final List<String> positionalArgs = args.where((argument) => !argument.startsWith('-')).toList();
-  final String targetPath = positionalArgs.isNotEmpty ? positionalArgs.first : 'lib';
+  final String targetPath           = positionalArgs.isNotEmpty ? positionalArgs.first : 'lib';
   final List<File> files;
 
   if (FileSystemEntity.isFileSync(targetPath)) {
     files = [File(targetPath)];
-  } else if (FileSystemEntity.isDirectorySync(targetPath)) {
+  }else if (FileSystemEntity.isDirectorySync(targetPath)) {
     final dir = Directory(targetPath);
-    files = dir
+    files     = dir
         .listSync(recursive: true, followLinks: false)
         .whereType<File>()
         .where((fileEntity) => fileEntity.path.endsWith('.dart'))
@@ -152,7 +154,7 @@ void main(List<String> args) {
               !norm.contains('/build/');
         })
         .toList();
-  } else {
+  }else {
     print('Path $targetPath does not exist.');
     return;
   }
@@ -162,7 +164,7 @@ void main(List<String> args) {
       print('Analyzing: ${file.path}');
     }
 
-    final content = file.readAsStringSync();
+    final content   = file.readAsStringSync();
     final formatted = formatImportsContent(content);
 
     if (formatted != content) {

@@ -23,7 +23,7 @@ NotificationUpdatable naShowNotificationUpdatable({
   Widget? subtitle,
   bool showIcon = true,
   ToastificationCallbacks? callbacks,
-  int seconds = 2,
+  int seconds           = 2,
   bool willHaveSubtitle = true
 //  Duration? animationDuration,
 //  DismissDirection? dismissDirection
