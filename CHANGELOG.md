@@ -1,3 +1,6 @@
+## 1.3.1
+- Fixed alignment and format scripts.
+
 ## 1.3.0
 
 - Added `naCastIf` utility for safe dynamic type casting with optional fallback.
